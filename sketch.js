@@ -9,17 +9,26 @@ let sounds = [];
 
 function setup() {
   createCanvas(windowWidth / 1.25, windowHeight / 1.25);
+  textFont("Courier New");
 }
 
 function draw() {
+
   background(0);
 
-  fill(255);
+  // stylization for game
+  fill("#B1BC83");
+  textStyle(BOLD);
   textAlign(CENTER);
+
+  // title of song and the music video game
   textSize(30);
   text("solar", width/2, height/2 - (15));
+
+  // instructions for music video game
   textSize(20);
   text("press the number keys to make music", width/2, height/2 + (20));
+
 }
 
 function instraOne() {
