@@ -9,6 +9,8 @@ let sounds = [];
 //   }
 // }
 
+let currentPage = 0;
+
 function setup() {
   createCanvas(windowWidth / 1.25, windowHeight / 1.25);
   textFont("Courier New");
@@ -16,23 +18,37 @@ function setup() {
 
 function draw() {
 
+  if (currentPage == 0) {
+    introPage();
+  } else if (currentPage == 1) {
+    musicPage();
+  }
+  
+}
+
+function introPage() {
+
   background(0);
   fill("#B1BC83");
   textAlign(CENTER);
   textStyle(BOLD);
 
-  // stylization for game
-  push();
   // title of song and the music video game
+
+  push();
   textSize(30);
   text("solar", width/2, height/2 - (15));
   pop()
 
-  textStyle(BOLDITALIC);
   // instructions for music video game
+  textStyle(BOLDITALIC);
   textSize(20);
   text("press the number keys to make music", width/2, height/2 + (20));
 
+}
+
+function musicPage() {
+  background("pink");
 }
 
 function bass() {
@@ -69,6 +85,11 @@ function vox() {
 
 
 function keyPressed() {
+
+  if (currentPage == 0) {
+    currentPage = 1;
+  } 
+
   if (key === '1') {
     bass();
   } else if (key === '2') {
