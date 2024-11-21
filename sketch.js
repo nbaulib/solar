@@ -18,13 +18,17 @@ function setup() {
 
 function draw() {
 
-  if (currentPage == 0) {
-    introPage();
-  } else if (currentPage == 1) {
-    musicPage();
+  // switch between intro page and music page 
+
+  if (currentPage == 0) { // page 0 is intro page
+    introPage(); // runs introPage
+  } else if (currentPage == 1) { // page 1 is music page
+    musicPage(); // runs musicPage
   }
-  
+
 }
+
+// displays intro page. it includes name of song and instructions.
 
 function introPage() {
 
