@@ -1,5 +1,7 @@
 let sounds = [];
 
+// credit: sam heckle - sound array demo 
+// https://editor.p5js.org/samheckle/sketches/wY2UFabY6D
 // function preload() {
 //   for (let i = 0; i < 7; i++) {
 //     let s = loadSound("assets/" + i + ".mp3");
@@ -33,28 +35,53 @@ function draw() {
 
 }
 
-function instraOne() {
-
+function bass() {
+  //sounds[0].play()
 }
 
-function instraTwo() {
-
+function clock() {
+  //sounds[0].play()
 }
+
+function guitar() {
+  //sounds[0].play()
+}
+
+function kick() {
+  //sounds[0].play()
+}
+
+function sawWave() {
+  //sounds[0].play()
+}
+
+function sitar() {
+  //sounds[0].play()
+}
+
+function snare() {
+  //sounds[0].play()
+}
+
+function vox() {
+  //sounds[0].play()
+}
+
 
 function keyPressed() {
   if (key === '1') {
-    instraOne()
+    bass();
   } else if (key === '2') {
-    instraTwo()
+    clock();
   } else if (key === '3') {
-
+    guitar();
   } else if (key === '4') {
-
+    kick();
   } else if (key === '5') {
-
+    sawWave();
   } else if (key === '6') {
-
+    sitar();
   } else if (key === '7') {
-
+    vox();
   }
 }
