@@ -12,7 +12,7 @@ let sounds = [];
 let currentPage = 0;
 
 function setup() {
-  createCanvas(windowWidth / 1.25, windowHeight / 1.25);
+  createCanvas(900, 600);
   textFont("Courier New");
 }
 
@@ -20,11 +20,13 @@ function draw() {
 
   // switch between intro page and music page 
 
-  if (currentPage == 0) { // page 0 is intro page
-    introPage(); // runs introPage
-  } else if (currentPage == 1) { // page 1 is music page
-    musicPage(); // runs musicPage
-  }
+  musicPage()
+
+  // if (currentPage == 0) { // page 0 is intro page
+  //   introPage(); // runs introPage
+  // } else if (currentPage == 1) { // page 1 is music page
+  //   musicPage(); // runs musicPage
+  // }
 
 }
 
@@ -52,7 +54,9 @@ function introPage() {
 }
 
 function musicPage() {
-  background("pink");
+  background("#B1BC83");
+  fill("black");
+  rect(0, height/3, width, height*3/4, 900, 900, 0, 0);
 }
 
 function bass() {
