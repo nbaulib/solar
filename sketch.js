@@ -56,7 +56,7 @@ function introPage() {
 function musicPage() {
   background("#B1BC83");
   fill("black");
-  rect(0, height/3, width, height*3/4, 900, 900, 0, 0);
+  circle(width/2, height, 900);
 }
 
 function bass() {
