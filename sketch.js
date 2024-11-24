@@ -11,7 +11,6 @@ function preload() {
   swv = loadSound("assets/sawwave.mp3");
 }
 
-let sounds = [];
 let currentPage = 0;
 let radius;
 let str = "birth   sun   spirit   freedom   ";
