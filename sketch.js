@@ -1,13 +1,15 @@
+// global
+let csk, vox1, vox2, swv;
 
+function preload() {
+  csk = loadSound("assets/clock_snare_kick.mp3");
 
-// credit: sam heckle - sound array demo 
-// https://editor.p5js.org/samheckle/sketches/wY2UFabY6D
-// function preload() {
-//   for (let i = 0; i < 7; i++) {
-//     let s = loadSound("assets/" + i + ".mp3");
-//     sounds.push(s);
-//   }
-// }
+  vox1 = loadSound("assets/vox1.mp3");
+
+  vox2 = loadSound("assets/vox2.mp3");
+
+  swv = loadSound("assets/sawwave.mp3");
+}
 
 let sounds = [];
 let currentPage = 0;
@@ -104,58 +106,22 @@ function textCircle() {
   pop();
 }
 
-function bass() {
-  //sounds[0].play()
-}
-
-function clock() {
-  //sounds[0].play()
-}
-
-function guitar() {
-  //sounds[0].play()
-}
-
-function kick() {
-  //sounds[0].play()
+function beat() {
+  csk.play();
 }
 
 function sawWave() {
-  //sounds[0].play()
+  swv.play();
 }
-
-function sitar() {
-  //sounds[0].play()
-}
-
-function snare() {
-  //sounds[0].play()
-}
-
-function vox() {
-  //sounds[0].play()
-}
-
 
 function keyPressed() {
 
   if (currentPage == 0) {
     currentPage = 1;
+    beat();
   } 
 
   if (key === '1') {
-    bass();
-  } else if (key === '2') {
-    clock();
-  } else if (key === '3') {
-    guitar();
-  } else if (key === '4') {
-    kick();
-  } else if (key === '5') {
     sawWave();
-  } else if (key === '6') {
-    sitar();
-  } else if (key === '7') {
-    vox();
   }
 }
