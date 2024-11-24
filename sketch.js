@@ -1,69 +1,64 @@
 // global
-let csk, vox1, vox2, swv;
-
-function preload() {
-  csk = loadSound("assets/clock_snare_kick.mp3");
-
-  vox1 = loadSound("assets/vox1.mp3");
-
-  vox2 = loadSound("assets/vox2.mp3");
-
-  swv = loadSound("assets/sawwave.mp3");
-}
-
+let csk, vox1, vox2, swv, sitar, guitar, bass;
+let rSaw = 0;
 let currentPage = 0;
 let radius;
 let str = "birth   sun   spirit   freedom   ";
 
+function preload() {
+  csk = loadSound("assets/clock_snare_kick.mp3");
+  vox1 = loadSound("assets/vox1.mp3");
+  vox2 = loadSound("assets/vox2.mp3");
+  swv = loadSound("assets/sawwave.mp3");
+  sitar = loadSound("assets/sitar.mp3");
+  guitar = loadSound("assets/guitar.mp3");
+  bass = loadSound("assets/bass.mp3")
+}
+
 function setup() {
   createCanvas(900, 600);
   textFont("Courier New");
-  radius = min(width,height)/3;
+  radius = min(width, height) / 3;
 }
 
 function draw() {
-
-  // switch between intro page and music page 
-
-  musicPage()
-  textCircle();
-
-  // if (currentPage == 0) { // page 0 is intro page
-  //   introPage(); // runs introPage
-  // } else if (currentPage == 1) { // page 1 is music page
-  //   musicPage(); // runs musicPage
-  //   textCircle();
-  // }
-
+  // transition between intro page and music page 
+  if (currentPage == 0) {
+    introPage();
+  } else if (currentPage == 1) {
+    musicPage();
+    textCircle();
+    holdSound();
+    animations();
+  }
 }
 
 // displays intro page. it includes name of song and instructions.
-
 function introPage() {
-
   background(0);
   fill("#B1BC83");
   textAlign(CENTER);
   textStyle(BOLD);
 
-  // title of song and the music video game
-
+  // title of song
   push();
   textSize(30);
-  text("solar", width/2, height/2 - (15));
-  pop()
+  text("solar", width / 2, height / 2 - (15));
+  pop();
 
-  // instructions for music video game
+  // instructions
+  push();
   textStyle(BOLDITALIC);
   textSize(20);
-  text("press the number keys to make music", width/2, height/2 + (20));
+  text("press the number keys to make music", width / 2, height / 2 + (20));
+  pop();
 
 }
 
 function musicPage() {
   background("#B1BC83");
   fill("black");
-  circle(width/2, height, 900);
+  circle(width / 2, height, 900);
 }
 
 
@@ -76,20 +71,20 @@ function textCircle() {
   // circle(width/2, height, radius*4); // circle as a guide
   // pop();
 
-  let angleBtwLetters = TWO_PI/str.length; 
+  let angleBtwLetters = TWO_PI / str.length;
   // calculates the angle btw letters in a str, based on the # of letters in the str
 
   push();
 
-  translate(width/2, height);
+  translate(width / 2, height);
   textAlign(CENTER, BASELINE);
-  textSize(radius/5) // makes text size dynamic
+  textSize(radius / 5) // makes text size dynamic
 
-  for(let i = 0; i < str.length; i++) {
+  for (let i = 0; i < str.length; i++) {
 
     push();
 
-    let angle = i*angleBtwLetters + (frameCount * 0.0025); 
+    let angle = i * angleBtwLetters + (frameCount * 0.0025);
     // adding frameCount to create rotation
 
     rotate(angle);
@@ -105,22 +100,78 @@ function textCircle() {
   pop();
 }
 
-function beat() {
-  csk.play();
+function animations() {
+  // sawwave circle
+  fill("white");
+  circle(width / 2, height, rSaw);
+
 }
 
-function sawWave() {
-  swv.play();
+// credit: https://p5js.org/reference/p5/keyCode/
+function holdSound() {
+  if (keyIsDown(49)) { // if "1" is pressed
+    if (!swv.isPlaying()) {
+      swv.play(); // only play if not already playing
+    }
+    // sawwave circle
+    rSaw += 10;
+
+    if (rSaw > 600) {
+      rSaw -= 200; // bounce
+    }
+  }
+
+  if (keyIsDown(50)) { // if "2" is pressed
+    if (!vox1.isPlaying()) {
+      vox1.play(); // only play if not already playing
+    }
+  }
+
+  if (keyIsDown(51)) { // if "3" is pressed
+    if (!vox2.isPlaying()) {
+      vox2.play(); // only play if not already playing
+    }
+  }
+
+  if (keyIsDown(52)) { // if "4" is pressed
+    if (!sitar.isPlaying()) {
+      sitar.play(); // only play if not already playing
+    }
+  }
+
+  if (keyIsDown(53)) { // if "5" is pressed
+    if (!bass.isPlaying()) {
+      bass.loop(); // only play if not already playing
+    }
+  }
+}
+
+function keyReleased() {
+  if (key == '1') {
+    swv.stop();
+  }
+
+  if (key == '2') {
+    vox1.stop();
+  }
+
+  if (key == '3') {
+    vox2.stop();
+  }
+
+  if (key == '4') {
+    sitar.stop();
+  }
+
+  if (key == '5') {
+    bass.stop();
+  }
 }
 
 function keyPressed() {
-
   if (currentPage == 0) {
     currentPage = 1;
-    beat();
-  } 
-
-  if (key === '1') {
-    sawWave();
+    csk.play();
+    guitar.play();
   }
 }
