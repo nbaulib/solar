@@ -1,12 +1,10 @@
 // global
 let csk, vox1, vox2, swv, sitar, guitar, bass;
-// let rSaw1 = 0;
-// let rSaw2 = 0;
 let rSaws = [];
 let currentPage = 0;
 let radius;
 let str = "birth   sun   spirit   freedom   ";
-let sounds = [];
+let sounds = []; // arrays to hold sound: https://editor.p5js.org/owenroberts/sketches/r1qpN_kI7
 let waveColors = ["#FDFE9C", "#FEFFB3", "#FEFFCC", "#FFFFE0", "#FFFFF2"]
 let maxRadius = [600, 550, 500, 450, 400];
 
