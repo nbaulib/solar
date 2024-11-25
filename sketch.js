@@ -79,6 +79,8 @@ function textCircle() {
   translate(width / 2, height);
   textAlign(CENTER, BASELINE);
   textSize(radius / 5) // makes text size dynamic
+  textStyle(NORMAL) // makes text size dynamic
+
 
   for (let i = 0; i < str.length; i++) {
 
@@ -109,6 +111,7 @@ function animations() {
 
 // credit: https://p5js.org/reference/p5/keyCode/
 function holdSound() {
+
   if (keyIsDown(49)) { // if "1" is pressed
     if (!swv.isPlaying()) {
       swv.play(); // only play if not already playing
@@ -169,9 +172,11 @@ function keyReleased() {
 }
 
 function keyPressed() {
+
   if (currentPage == 0) {
     currentPage = 1;
     csk.play();
     guitar.play();
   }
+
 }
