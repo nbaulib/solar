@@ -2,7 +2,7 @@
 let csk, vox1, vox2, swv, sitar, guitar, bass;
 // let rSaw1 = 0;
 // let rSaw2 = 0;
-let rSaws = [];
+let rSound = [];
 let currentPage = 0;
 let radius;
 let str = "birth   sun   spirit   freedom   ";
@@ -23,11 +23,11 @@ function preload() {
 function setup() {
   createCanvas(900, 600);
   textFont("Courier New");
-  radius = min(width, height)/3;
+  radius = min(width, height) / 3;
 
-   // initialize radius values for each instrument (default to 0)
-  for(let i = 0; i < sounds.length; i++) {
-    rSaws[i] = 0;
+  // initialize radius values for each instrument (default to 0)
+  for (let i = 0; i < sounds.length; i++) {
+    rSound[i] = 0;
   }
 
 }
@@ -114,31 +114,29 @@ function textCircle() {
 }
 
 function animations() {
-  // sawwave circle
-
-  for (let i = 0; i < rSaws.length; i++) {
+  // circles
+  for (let i = 0; i < rSound.length; i++) {
     fill(waveColors[i]);
-    circle(width/2, height, rSaws[i]);
+    circle(width / 2, height, rSound[i]);
   }
-
 }
 
 // credit: https://p5js.org/reference/p5/keyCode/
 function holdSound() {
 
-  for(let i = 0; i < sounds.length; i++) {
+  for (let i = 0; i < sounds.length; i++) {
 
     let keyNumber = 49 + i; // starting from key "1" to "5"
 
-    if(keyIsDown(keyNumber)){ // if corresponding key is pressed
+    if (keyIsDown(keyNumber)) { // if corresponding key is pressed
 
-      if(!sounds[i].isPlaying()) {
+      if (!sounds[i].isPlaying()) {
         sounds[i].play() // only play if not already playing
       }
 
-      rSaws[i] += 10;
-      if(rSaws[i] > maxRadius[i]) {
-        rSaws[i] = maxRadius[i];
+      rSound[i] += 10;
+      if (rSound[i] > maxRadius[i]) {
+        rSound[i] = maxRadius[i];
       }
     }
 
@@ -149,13 +147,13 @@ function holdSound() {
 // credit: https://p5js.org/reference/p5/keyCode/
 function keyReleased() {
 
-  for(let i = 0; i < sounds.length; i++) {
+  for (let i = 0; i < sounds.length; i++) {
 
     let keyNumber = 49 + i; // starting from key "1" to "5"
 
-    if(keyCode == keyNumber){
+    if (keyCode == keyNumber) {
       sounds[i].stop();
-      rSaws[i] = 0;
+      rSound[i] = 0;
     }
 
   }
@@ -163,11 +161,9 @@ function keyReleased() {
 }
 
 function keyPressed() {
-
   if (currentPage == 0) {
     currentPage = 1;
     csk.play();
     guitar.play();
   }
-
 }
