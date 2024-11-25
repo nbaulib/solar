@@ -65,9 +65,22 @@ function introPage() {
 }
 
 function musicPage() {
+
+
   background("#B1BC83");
   fill("black");
   circle(width / 2, height, 900);
+
+  push()
+  noFill()
+  stroke("white");
+  circle(width / 2, height, 600);
+  circle(width / 2, height, 550);
+  circle(width / 2, height, 500);
+  circle(width / 2, height, 450);
+  circle(width / 2, height, 400);
+  pop()
+
 }
 
 
