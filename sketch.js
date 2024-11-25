@@ -1,24 +1,35 @@
 // global
 let csk, vox1, vox2, swv, sitar, guitar, bass;
-let rSaw = 0;
+// let rSaw1 = 0;
+// let rSaw2 = 0;
+let rSaws = [];
 let currentPage = 0;
 let radius;
 let str = "birth   sun   spirit   freedom   ";
+let sounds = [];
+let waveColors = ["#FDFE9C", "#FEFFB3", "#FEFFCC", "#FFFFE0", "#FFFFF2"]
+let maxRadius = [600, 550, 500, 450, 400];
 
 function preload() {
-  csk = loadSound("assets/clock_snare_kick.mp3");
-  vox1 = loadSound("assets/vox1.mp3");
-  vox2 = loadSound("assets/vox2.mp3");
-  swv = loadSound("assets/sawwave.mp3");
-  sitar = loadSound("assets/sitar.mp3");
-  guitar = loadSound("assets/guitar.mp3");
-  bass = loadSound("assets/bass.mp3")
+  csk = loadSound("assets/clock_snare_kick.mp3"); // const
+  guitar = loadSound("assets/guitar.mp3"); // const
+  sounds.push(loadSound("assets/vox1.mp3")); // sounds[0]
+  sounds.push(loadSound("assets/vox2.mp3")); // sounds[1]
+  sounds.push(loadSound("assets/sawwave.mp3")); // sounds[2]
+  sounds.push(loadSound("assets/sitar.mp3")); // sounds[3]
+  sounds.push(loadSound("assets/bass.mp3")); // sounds[4]
 }
 
 function setup() {
   createCanvas(900, 600);
   textFont("Courier New");
-  radius = min(width, height) / 3;
+  radius = min(width, height)/3;
+
+   // initialize radius values for each instrument (default to 0)
+  for(let i = 0; i < sounds.length; i++) {
+    rSaws[i] = 0;
+  }
+
 }
 
 function draw() {
@@ -104,71 +115,51 @@ function textCircle() {
 
 function animations() {
   // sawwave circle
-  fill("white");
-  circle(width / 2, height, rSaw);
+
+  for (let i = 0; i < rSaws.length; i++) {
+    fill(waveColors[i]);
+    circle(width/2, height, rSaws[i]);
+  }
 
 }
 
 // credit: https://p5js.org/reference/p5/keyCode/
 function holdSound() {
 
-  if (keyIsDown(49)) { // if "1" is pressed
-    if (!swv.isPlaying()) {
-      swv.play(); // only play if not already playing
-    }
-    // sawwave circle
-    rSaw += 10;
+  for(let i = 0; i < sounds.length; i++) {
 
-    if (rSaw > 600) {
-      rSaw -= 200; // bounce
+    let keyNumber = 49 + i; // starting from key "1" to "5"
+
+    if(keyIsDown(keyNumber)){ // if corresponding key is pressed
+
+      if(!sounds[i].isPlaying()) {
+        sounds[i].play() // only play if not already playing
+      }
+
+      rSaws[i] += 10;
+      if(rSaws[i] > maxRadius[i]) {
+        rSaws[i] = maxRadius[i];
+      }
     }
+
   }
 
-  if (keyIsDown(50)) { // if "2" is pressed
-    if (!vox1.isPlaying()) {
-      vox1.play(); // only play if not already playing
-    }
-  }
-
-  if (keyIsDown(51)) { // if "3" is pressed
-    if (!vox2.isPlaying()) {
-      vox2.play(); // only play if not already playing
-    }
-  }
-
-  if (keyIsDown(52)) { // if "4" is pressed
-    if (!sitar.isPlaying()) {
-      sitar.play(); // only play if not already playing
-    }
-  }
-
-  if (keyIsDown(53)) { // if "5" is pressed
-    if (!bass.isPlaying()) {
-      bass.loop(); // only play if not already playing
-    }
-  }
 }
 
+// credit: https://p5js.org/reference/p5/keyCode/
 function keyReleased() {
-  if (key == '1') {
-    swv.stop();
+
+  for(let i = 0; i < sounds.length; i++) {
+
+    let keyNumber = 49 + i; // starting from key "1" to "5"
+
+    if(keyCode == keyNumber){
+      sounds[i].stop();
+      rSaws[i] = 0;
+    }
+
   }
 
-  if (key == '2') {
-    vox1.stop();
-  }
-
-  if (key == '3') {
-    vox2.stop();
-  }
-
-  if (key == '4') {
-    sitar.stop();
-  }
-
-  if (key == '5') {
-    bass.stop();
-  }
 }
 
 function keyPressed() {
