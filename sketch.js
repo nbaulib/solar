@@ -65,36 +65,30 @@ function introPage() {
 }
 
 function musicPage() {
-
-
+  // green background
   background("#B1BC83");
+  //black circle
   fill("black");
   circle(width / 2, height, 900);
 
-  push()
-  noFill()
+  // guide circles
+  push();
+  noFill();
   stroke("white");
   circle(width / 2, height, 600);
   circle(width / 2, height, 550);
   circle(width / 2, height, 500);
   circle(width / 2, height, 450);
   circle(width / 2, height, 400);
-  pop()
+  pop();
 
 }
 
 
 // text on circle tutorial: https://www.youtube.com/watch?v=pBtgOdAnoJI 
 function textCircle() {
-
-  // push();
-  // noFill();
-  // stroke(0,150,255);
-  // circle(width/2, height, radius*4); // circle as a guide
-  // pop();
-
-  let angleBtwLetters = TWO_PI / str.length;
   // calculates the angle btw letters in a str, based on the # of letters in the str
+  let angleBtwLetters = TWO_PI / str.length;
 
   push();
 
@@ -132,14 +126,14 @@ function animations() {
   }
 }
 
-// credit: https://p5js.org/reference/p5/keyCode/
+// ref: https://p5js.org/reference/p5/keyCode/
 function holdSound() {
 
   for (let i = 0; i < sounds.length; i++) {
 
     let keyNumber = 49 + i; // starting from key "1" to "5"
 
-    if (keyIsDown(keyNumber)) { // if corresponding key is pressed
+    if (keyIsDown(keyNumber)) { // if corresponding key is held
 
       if (!sounds[i].isPlaying()) {
         sounds[i].play() // only play if not already playing
@@ -155,25 +149,23 @@ function holdSound() {
 
 }
 
-// credit: https://p5js.org/reference/p5/keyCode/
+// ref: https://p5js.org/reference/p5/keyCode/
 function keyReleased() {
-
+  // a loop to stop sound when key is released 
   for (let i = 0; i < sounds.length; i++) {
-
     let keyNumber = 49 + i; // starting from key "1" to "5"
-
     if (keyCode == keyNumber) {
       sounds[i].stop();
       rSound[i] = 0;
     }
-
   }
-
 }
 
 function keyPressed() {
+  // when key pressed check page number and change accordingly
   if (currentPage == 0) {
     currentPage = 1;
+    // 2 constant sounds
     csk.play();
     guitar.play();
   }
