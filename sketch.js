@@ -61,7 +61,7 @@ function introPage() {
   push();
   textStyle(BOLDITALIC);
   textSize(20);
-  text("press the number keys to make music", width / 2, height / 2 + (20));
+  text("press the number keys to make music.\nstart by hitting any key.", width / 2, height / 2 + (20));
   pop();
 
 }
