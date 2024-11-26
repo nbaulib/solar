@@ -70,25 +70,26 @@ function musicPage() {
   // green background
   background("#B1BC83");
 
-  for (let i=0; i <= sounds.length; i++) {
+  for (let i = 0; i <= sounds.length; i++) {
 
     let keyNumber = 49 + i;
-    
-    rect((width/5)*i, 0, width/5, height);
+
+    rect((width / 5) * i, 0, width / 5, height);
     fill("#B1BC83");
 
-    if(keyCode == keyNumber) {
+    if (keyCode == keyNumber) {
       fill("#6A714F")
     }
 
     // adding text to keys based on iteration i
-    let keyStr = nf(i+1); 
+
+    let keyStr = nf(i);
     // reference: https://p5js.org/reference/p5/nf/#:~:text=nf()%20converts%20numbers%20such,returns%20the%20string%20%27123.45%27%20.
 
     push()
-      fill("black");
-      textSize(30);
-      text(keyStr, ((width/5)*i)+90, 100);
+    fill("black");
+    textSize(30);
+    text(keyStr, ((width / 5) * i) + 90, 100);
     pop()
 
   }
@@ -161,7 +162,7 @@ function soundCircles() {
     // draw circles
     push();
     fill(waveColors[i]);
-    circle(width / 2, height, soundRadius[i]); 
+    circle(width / 2, height, soundRadius[i]);
     pop();
   }
 }
