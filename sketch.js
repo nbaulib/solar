@@ -74,7 +74,7 @@ function musicPage() {
 
     let keyNumber = 49 + i;
 
-    if(keyCode == keyNumber) {
+    if (keyCode == keyNumber) {
       fill("#6A714F")
     } else {
       fill("#B1BC83"); // Default color
@@ -82,18 +82,18 @@ function musicPage() {
 
     rect((width/5)*i, 0, width/5, height);
 
-    push()
-      fill("black");
-      textSize(30);
-      text(i+1, ((width/5)*i)+90, 100);
-    pop()
+    push();
+    fill("black");
+    textSize(30);
+    text(i + 1, ((width / 5) * i) + 90, 100);
+    pop();
 
   }
 
-  push()
+  push();
   fill("black");
   circle(width / 2, height, 900);
-  pop()
+  pop(); 
 
   // guide circles
   push();
