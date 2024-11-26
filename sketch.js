@@ -73,9 +73,6 @@ function musicPage() {
   for (let i=0; i <= sounds.length; i++) {
 
     let keyNumber = 49 + i;
-    
-    rect((width/5)*i, 0, width/5, height);
-    fill("#B1BC83");
 
     if(keyCode == keyNumber) {
       fill("#6A714F")
@@ -83,14 +80,12 @@ function musicPage() {
       fill("#B1BC83"); // Default color
     }
 
-    // adding text to keys based on iteration i
-    let keyStr = nf(i+1); 
-    // reference: https://p5js.org/reference/p5/nf/#:~:text=nf()%20converts%20numbers%20such,returns%20the%20string%20%27123.45%27%20.
+    rect((width/5)*i, 0, width/5, height);
 
     push()
       fill("black");
       textSize(30);
-      text(keyStr, ((width/5)*i)+90, 100);
+      text(i+1, ((width/5)*i)+90, 100);
     pop()
 
   }
