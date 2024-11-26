@@ -1,6 +1,6 @@
 // global
 let csk, vox1, vox2, swv, sitar, guitar, bass;
-let sounds = []; // arrays to hold sound: https://editor.p5js.org/owenroberts/sketches/r1qpN_kI7
+let sounds = [];
 let currentPage = 0;
 let str = "birth   sun   spirit   freedom   ";
 let textRadius;
@@ -70,26 +70,22 @@ function musicPage() {
   // green background
   background("#B1BC83");
 
-  for (let i=0; i <= sounds.length; i++) {
-
+  for (let i = 0; i < sounds.length; i++) {
     let keyNumber = 49 + i;
     
-    rect((width/5)*i, 0, width/5, height);
-    fill("#B1BC83");
-
-    if(keyCode == keyNumber) {
+    if (keyCode == keyNumber) {
       fill("#6A714F")
+    } else {
+      fill("#B1BC83"); // Default color
     }
 
-    // adding text to keys based on iteration i
-    let keyStr = nf(i+1); 
-    // reference: https://p5js.org/reference/p5/nf/#:~:text=nf()%20converts%20numbers%20such,returns%20the%20string%20%27123.45%27%20.
+    rect((width / 5) * i, 0, width / 5, height);
 
-    push()
-      fill("black");
-      textSize(30);
-      text(keyStr, ((width/5)*i)+90, 100);
-    pop()
+    push();
+    fill("black");
+    textSize(30);
+    text(i+1, ((width / 5) * i) + 90, 100);
+    pop();
 
   }
 
@@ -161,7 +157,7 @@ function soundCircles() {
     // draw circles
     push();
     fill(waveColors[i]);
-    circle(width / 2, height, soundRadius[i]); 
+    circle(width / 2, height, soundRadius[i]);
     pop();
   }
 }
