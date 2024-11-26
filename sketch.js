@@ -68,8 +68,27 @@ function musicPage() {
 
 
   background("#B1BC83");
+
+  push()
+  for (let i=0; i <= 5; i++) {
+    rect((width/5)*i, 0, width/5, height);
+    let keyNumber = nf(i+1); 
+    // reference: https://p5js.org/reference/p5/nf/#:~:text=nf()%20converts%20numbers%20such,returns%20the%20string%20%27123.45%27%20.
+
+    push()
+      fill("black");
+      textSize(30);
+      text(keyNumber, ((width/5)*i)+90, 100);
+    pop()
+
+  }
+  pop()
+
+
+  push()
   fill("black");
   circle(width / 2, height, 900);
+  pop()
 
   push()
   noFill()
