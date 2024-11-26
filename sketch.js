@@ -1,15 +1,19 @@
-// global
-let csk, vox1, vox2, swv, sitar, guitar, bass;
-let sounds = [];
-let currentPage = 0;
-let str = "luz   al   sol   le   pertnezco  ";
-let textRadius;
-let waveColors = ["#FDFE9C", "#FEFFB3", "#FEFFCC", "#FFFFE0", "#FFFFF2"]
-let maxRadius = [600, 550, 500, 450, 400];
-let soundRadius = [];
-let rVelocity = [];
-let pressed = [];
+// EXERCISE #5
+// By Michelle Lee, Nico Bautista-Libreros
 
+// global
+let csk, vox1, vox2, swv, sitar, guitar, bass; // variables for the instruments
+let sounds = []; // vectors to hold the instruments 
+let currentPage = 0; // page variable
+let str = "luz   al   sol   le   pertnezco  "; // string of words
+let textRadius; // controls how far away the text is placed from the center
+let waveColors = ["#FDFE9C", "#FEFFB3", "#FEFFCC", "#FFFFE0", "#FFFFF2"] // shades of yellow in vector, used for the sun waves
+let maxRadius = [600, 550, 500, 450, 400]; // vector of the max radiuses for each instruments' sun wave
+let soundRadius = []; // the radius of the sun waves as it expands and decreases
+let rVelocity = []; // velocity of radius movement 
+let pressed = []; // holds true or false values for whether key is pressed or not
+
+// loads in the instruments
 function preload() {
   csk = loadSound("assets/clock_snare_kick.mp3"); // const
   guitar = loadSound("assets/guitar.mp3"); // const
@@ -25,11 +29,10 @@ function setup() {
   textFont("Courier New");
   textRadius = min(width, height) / 3;
 
-  // initialize radius values for each instrument (default to 0)
   for (let i = 0; i < sounds.length; i++) {
-    soundRadius[i] = 0;
-    rVelocity[i] = 0;
-    pressed[i] = false;
+    soundRadius[i] = 0; // initialize radius values for each instrument (default to 0)
+    rVelocity[i] = 0; // initialize velocity values for each sun wave (default to 0)
+    pressed[i] = false; // default all values to false 
   }
 
 }
@@ -48,8 +51,11 @@ function draw() {
 
 // displays intro page. it includes name of song and instructions.
 function introPage() { // MICHELLE X NICO
+
   background(0);
-  fill("#B1BC83");
+
+  // text stylization
+  fill("#B1BC83"); 
   textAlign(CENTER);
   textStyle(BOLD);
 
@@ -69,19 +75,23 @@ function introPage() { // MICHELLE X NICO
 }
 
 function musicPage() { // MICHELLE
+
   // green background
   background("#B1BC83");
 
   for (let i=0; i <= sounds.length; i++) {
 
+    // if key is pressed, change to darker color. else, switch to default color. 
     if (pressed[i]) {
       fill("#6A714F") // darker color
     } else {
       fill("#B1BC83"); // default color
     }
  
+    // draws the keys 
     rect((width/5)*i, 0, width/5, height);
 
+    // numbers the keys from 1 to 5
     push();
     fill("black");
     textStyle(NORMAL)
@@ -91,6 +101,7 @@ function musicPage() { // MICHELLE
 
   }
 
+  // black semi circle
   push();
   fill("black");
   circle(width / 2, height, 900);
@@ -109,7 +120,6 @@ function musicPage() { // MICHELLE
 
 }
 
-
 // text on circle tutorial: https://www.youtube.com/watch?v=pBtgOdAnoJI 
 function textCircle() { // MICHELLE
   // calculates the angle btw letters in a str, based on the # of letters in the str
@@ -117,10 +127,10 @@ function textCircle() { // MICHELLE
 
   push();
 
-  translate(width / 2, height);
+  translate(width / 2, height); // shifts the origin of the canvas to the bottom center of the screen
   textAlign(CENTER, BASELINE);
   textSize(textRadius / 5) // makes text size dynamic
-  textStyle(NORMAL) // makes text size dynamic
+  textStyle(NORMAL)
 
 
   for (let i = 0; i < str.length; i++) {
@@ -132,6 +142,7 @@ function textCircle() { // MICHELLE
 
     rotate(angle);
     translate(0, -textRadius * 1.89);  // moves the text along the circle
+    // -textRadius * 1.89 - affects how big or small the distance between the center of the canvas and the text will be
 
     fill("white");
     noStroke();
@@ -145,6 +156,7 @@ function textCircle() { // MICHELLE
 
 function soundCircles() { // MICHELLE X NICO
   for (let i = 0; i < soundRadius.length; i++) {
+
     // increase or decrease the radius
     soundRadius[i] += rVelocity[i];
 
