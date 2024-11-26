@@ -47,7 +47,7 @@ function draw() {
 }
 
 // displays intro page. it includes name of song and instructions.
-function introPage() {
+function introPage() { // MICHELLE X NICO
   background(0);
   fill("#B1BC83");
   textAlign(CENTER);
@@ -68,7 +68,7 @@ function introPage() {
 
 }
 
-function musicPage() {
+function musicPage() { // MICHELLE
   // green background
   background("#B1BC83");
 
@@ -111,7 +111,7 @@ function musicPage() {
 
 
 // text on circle tutorial: https://www.youtube.com/watch?v=pBtgOdAnoJI 
-function textCircle() {
+function textCircle() { // MICHELLE
   // calculates the angle btw letters in a str, based on the # of letters in the str
   let angleBtwLetters = TWO_PI / str.length;
 
@@ -143,7 +143,7 @@ function textCircle() {
   pop();
 }
 
-function soundCircles() {
+function soundCircles() { // MICHELLE X NICO
   for (let i = 0; i < soundRadius.length; i++) {
     // increase or decrease the radius
     soundRadius[i] += rVelocity[i];
@@ -165,7 +165,7 @@ function soundCircles() {
 }
 
 // ref: https://p5js.org/reference/p5/keyCode/
-function holdSound() {
+function holdSound() { // NICO
 
   for (let i = 0; i < sounds.length; i++) {
     let keyNumber = 49 + i; // starting from key "1" to "5"
@@ -180,7 +180,7 @@ function holdSound() {
 }
 
 // ref: https://p5js.org/reference/p5/keyCode/
-function keyReleased() {
+function keyReleased() { // NICO
   
   // a loop to stop sound when key is released
   for (let i = 0; i < sounds.length; i++) { 
@@ -193,7 +193,7 @@ function keyReleased() {
   }
 }
 
-function keyPressed() {
+function keyPressed() { // NICO
   // when key pressed check page number and change accordingly
   if (currentPage == 0) {
     currentPage = 1;
