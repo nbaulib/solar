@@ -74,8 +74,6 @@ function musicPage() {
 
   for (let i=0; i <= sounds.length; i++) {
 
-    let keyNumber = 49 + i;
-
     if (pressed[i]) {
       fill("#6A714F") // darker color
     } else {
