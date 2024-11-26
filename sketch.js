@@ -2,12 +2,13 @@
 let csk, vox1, vox2, swv, sitar, guitar, bass;
 let sounds = [];
 let currentPage = 0;
-let str = "birth   sun   spirit   freedom   ";
+let str = "luz   al   sol   le   pertnezco  ";
 let textRadius;
 let waveColors = ["#FDFE9C", "#FEFFB3", "#FEFFCC", "#FFFFE0", "#FFFFF2"]
 let maxRadius = [600, 550, 500, 450, 400];
 let soundRadius = [];
 let rVelocity = [];
+let pressed = [];
 
 function preload() {
   csk = loadSound("assets/clock_snare_kick.mp3"); // const
@@ -28,6 +29,7 @@ function setup() {
   for (let i = 0; i < sounds.length; i++) {
     soundRadius[i] = 0;
     rVelocity[i] = 0;
+    pressed[i] = false;
   }
 
 }
@@ -74,12 +76,12 @@ function musicPage() {
 
     let keyNumber = 49 + i;
 
-    if (keyCode == keyNumber) {
-      fill("#6A714F")
+    if (pressed[i]) {
+      fill("#6A714F") // darker color
     } else {
-      fill("#B1BC83"); // Default color
+      fill("#B1BC83"); // default color
     }
-
+ 
     rect((width/5)*i, 0, width/5, height);
 
     push();
@@ -172,6 +174,7 @@ function holdSound() {
       if (!sounds[i].isPlaying()) {
         sounds[i].play(); // only play if not already playing
         rVelocity[i] = 10; // increase radius
+        pressed[i] = true;
       }
     }
   }
@@ -179,12 +182,14 @@ function holdSound() {
 
 // ref: https://p5js.org/reference/p5/keyCode/
 function keyReleased() {
-  // a loop to stop sound when key is released 
-  for (let i = 0; i < sounds.length; i++) {
+  
+  // a loop to stop sound when key is released
+  for (let i = 0; i < sounds.length; i++) { 
     let keyNumber = 49 + i; // starting from key "1" to "5"
     if (keyCode == keyNumber) {
       sounds[i].stop();
       rVelocity[i] = -10; // decrease radius
+      pressed[i] = false;
     }
   }
 }
