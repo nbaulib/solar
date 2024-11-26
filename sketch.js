@@ -86,6 +86,7 @@ function musicPage() {
 
     push();
     fill("black");
+    textStyle(NORMAL)
     textSize(30);
     text(i + 1, ((width / 5) * i) + 90, 100);
     pop();
