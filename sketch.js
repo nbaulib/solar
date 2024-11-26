@@ -1,12 +1,13 @@
 // global
 let csk, vox1, vox2, swv, sitar, guitar, bass;
-let rSound = [];
-let currentPage = 0;
-let radius;
-let str = "birth   sun   spirit   freedom   ";
 let sounds = []; // arrays to hold sound: https://editor.p5js.org/owenroberts/sketches/r1qpN_kI7
+let currentPage = 0;
+let str = "birth   sun   spirit   freedom   ";
+let textRadius;
 let waveColors = ["#FDFE9C", "#FEFFB3", "#FEFFCC", "#FFFFE0", "#FFFFF2"]
 let maxRadius = [600, 550, 500, 450, 400];
+let soundRadius = [];
+let rVelocity = [];
 
 function preload() {
   csk = loadSound("assets/clock_snare_kick.mp3"); // const
@@ -21,11 +22,12 @@ function preload() {
 function setup() {
   createCanvas(900, 600);
   textFont("Courier New");
-  radius = min(width, height) / 3;
+  textRadius = min(width, height) / 3;
 
   // initialize radius values for each instrument (default to 0)
   for (let i = 0; i < sounds.length; i++) {
-    rSound[i] = 0;
+    soundRadius[i] = 0;
+    rVelocity[i] = 0;
   }
 
 }
@@ -38,7 +40,7 @@ function draw() {
     musicPage();
     textCircle();
     holdSound();
-    animations();
+    soundCircles();
   }
 }
 
@@ -119,7 +121,7 @@ function textCircle() {
 
   translate(width / 2, height);
   textAlign(CENTER, BASELINE);
-  textSize(radius / 5) // makes text size dynamic
+  textSize(textRadius / 5) // makes text size dynamic
   textStyle(NORMAL) // makes text size dynamic
 
 
@@ -131,7 +133,7 @@ function textCircle() {
     // adding frameCount to create rotation
 
     rotate(angle);
-    translate(0, -radius * 1.89);  // moves the text along the circle
+    translate(0, -textRadius * 1.89);  // moves the text along the circle
 
     fill("white");
     noStroke();
@@ -143,14 +145,24 @@ function textCircle() {
   pop();
 }
 
-function animations() {
-  // circles
-  for (let i = 0; i < rSound.length; i++) {
+function soundCircles() {
+  for (let i = 0; i < soundRadius.length; i++) {
+    // increase or decrease the radius
+    soundRadius[i] += rVelocity[i];
+
+    // circle bounds
+    if (soundRadius[i] < 0) {
+      soundRadius[i] = 0;
+      rVelocity[i] = 0; // stop shrinking
+    } else if (soundRadius[i] > maxRadius[i]) {
+      soundRadius[i] = maxRadius[i]; // stop growing
+    }
+
+    // draw circles
     push();
     fill(waveColors[i]);
-    circle(width / 2, height, rSound[i]);
+    circle(width / 2, height, soundRadius[i]); 
     pop();
-
   }
 }
 
@@ -158,23 +170,14 @@ function animations() {
 function holdSound() {
 
   for (let i = 0; i < sounds.length; i++) {
-
     let keyNumber = 49 + i; // starting from key "1" to "5"
-
     if (keyIsDown(keyNumber)) { // if corresponding key is held
-
       if (!sounds[i].isPlaying()) {
-        sounds[i].play() // only play if not already playing
-      }
-
-      rSound[i] += 10;
-      if (rSound[i] > maxRadius[i]) {
-        rSound[i] = maxRadius[i];
+        sounds[i].play(); // only play if not already playing
+        rVelocity[i] = 10; // increase radius
       }
     }
-
   }
-
 }
 
 // ref: https://p5js.org/reference/p5/keyCode/
@@ -184,7 +187,7 @@ function keyReleased() {
     let keyNumber = 49 + i; // starting from key "1" to "5"
     if (keyCode == keyNumber) {
       sounds[i].stop();
-      rSound[i] = 0;
+      rVelocity[i] = -10; // decrease radius
     }
   }
 }
